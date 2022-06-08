@@ -1,28 +1,28 @@
 import pymysql
 # =============================CREATE DB=====================
-# connection = pymysql.connect(
-#     host="localhost",
-#     user="root",
-#     password="",
-#     database=""
-# )
-# with connection.cursor() as c:
-#     c.execute("CREATE SCHEMA IF NOT EXISTS `example` DEFAULT CHARACTER SET utf8;")
-# connection.close()
-#
-# connection = pymysql.connect(
-#     host="localhost",
-#     user="root",
-#     password="",
-#     database=""
-# )
-# connection.close()
+connection = pymysql.connect(
+    host="localhost",
+    user="root",
+    password="root",
+    database=""
+)
+with connection.cursor() as c:
+    c.execute("CREATE SCHEMA IF NOT EXISTS `example` DEFAULT CHARACTER SET utf8;")
+connection.close()
+
+connection = pymysql.connect(
+    host="localhost",
+    user="root",
+    password="root",
+    database=""
+)
+connection.close()
 # ==========================CREATE TABLE============
 
 connection = pymysql.connect(
     host="localhost",
     user="root",
-    password="",
+    password="root",
     database="example"
 )
 

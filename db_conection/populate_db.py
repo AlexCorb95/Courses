@@ -6,7 +6,7 @@ import datetime
 connection = pymysql.connect(
     host="localhost",
     user="root",
-    password="",
+    password="root",
     database="example"
 )
 
@@ -15,7 +15,7 @@ with connection.cursor() as c:
         for i, line in enumerate(csv_file):
             if "cnt" in line:
                 coloms = line
-                print(coloms)
+                # print(coloms)
                 continue
             else:
                 values = line.split(",")

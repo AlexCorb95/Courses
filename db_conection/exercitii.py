@@ -7,7 +7,7 @@ import datetime
 connection = pymysql.connect(
     host="localhost",
     user="root",
-    password="",
+    password="root",
     database="example"
 )
 with connection.cursor() as c:
