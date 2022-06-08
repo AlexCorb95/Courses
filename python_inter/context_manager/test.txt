@@ -1,0 +1,1 @@
+We wrote in the file with our own Context Manager which is a function

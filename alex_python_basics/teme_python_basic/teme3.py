@@ -1,0 +1,3 @@
+# 1     Avand o lista cu doctorate (care contine mai multe string-uri, fiecare string e un doctorat), scrieti un algoritm care sa verifice daca un alt string se afla in lista existanta. Daca da, sa se afiseze "plagiat", altfel "original".
+# 2     Dintr-o lista cu numere, sa se afiseze 3 liste formate din numerele divizibile cu 2, 3, 5, ignorand restul numerelor.
+# 3     Printati toate patratele perfecte intre 0 si 10000 (incl 0, 10000)
