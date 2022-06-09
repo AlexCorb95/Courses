@@ -13,16 +13,16 @@ connection = pymysql.connect(
 with connection.cursor() as c:
     with open('london-bikes.csv') as csv_file:
         for i, line in enumerate(csv_file):
-            if "cnt" in line:
-                coloms = line
+            if i == 0:
+                columns = line
                 # print(coloms)
                 continue
             else:
                 values = line.split(",")
                 values[0] = datetime.datetime.strptime(values[0], "%Y-%m-%d %H:%M:%S")
 
-                coloms_values = ",".join(["%s" for elem in values])
-                c.execute(f"insert into `bikesharing`({coloms}) values ({coloms_values})", values)
+                columns_values = ",".join(["%s" for elem in values])
+                c.execute(f"insert into `bikesharing`({columns}) values ({columns_values})", values)
             if i % 100 == 0:
                 connection.commit()
 connection.close()

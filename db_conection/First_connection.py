@@ -8,7 +8,8 @@ connection = pymysql.connect(
 )
 with connection.cursor() as c:
     c.execute("SELECT VERSION()")
-    c.execute("CREATE SCHEMA IF NOT EXISTS `` DEFAULT CHARACTER SET utf8;")
     version= c.fetchone()
+    c.execute("CREATE SCHEMA IF NOT EXISTS `example1` DEFAULT CHARACTER SET utf8;")
     print(f"Database version: {version[0]}")
-c.close()
+    connection.commit()
+connection.close()
