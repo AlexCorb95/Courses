@@ -1,88 +1,50 @@
 import pymysql
 
 
+def execute_query(query, database=""):
+    connection = pymysql.connect(
+        host="localhost",
+        user="root",
+        password="root",
+        database=database
+    )
+    with connection.cursor() as c:
+        c.execute(query)
+        connection.commit()
+        results = c.fetchall()
+    connection.close()
+    return results
+
+
 class ToDoApp:
     def __init__(self):
-        connection = pymysql.connect(
-            host="localhost",
-            user="root",
-            password="root",
-            database=""
-        )
-        with connection.cursor() as c:
-            c.execute("CREATE SCHEMA IF NOT EXISTS `ToDo_DB` DEFAULT CHARACTER SET utf8;")
-        connection.close()
-        connection = pymysql.connect(
-            host="localhost",
-            user="root",
-            password="root",
-            database="ToDo_DB"
-        )
-        with connection.cursor() as c:
-            c.execute(
-                "CREATE TABLE IF NOT EXISTS `todo_list`(taskID int primary key auto_increment,task varchar(255),done boolean);")
-        connection.close()
+        execute_query("CREATE SCHEMA IF NOT EXISTS `ToDo_DB` DEFAULT CHARACTER SET utf8;")
+        execute_query("CREATE TABLE IF NOT EXISTS `todo_list`(taskID int primary key auto_increment,task varchar(255),done boolean);","ToDo_DB")
 
-    # create conection db
-    # create schema if not exists
-    # create table if not exists
     def show(self):
-        connection = pymysql.connect(
-            host="localhost",
-            user="root",
-            password="root",
-            database="ToDo_DB"
-        )
-        with connection.cursor() as c:
-            c.execute("select * from `todo_list`;")
-            results = c.fetchall()
-            for elem in results:
-                s = lambda x: 'Status: Done' if x == 1 else 'Status: Not Done'
-                print(f"TaskID :{elem[0]} | Task: {elem[1]} | {s(elem[2])} ")
-            connection.close()
+        results = execute_query("select * from `todo_list`;","ToDo_DB")
+
+        for elem in results:
+            s = lambda x: 'Status: Done' if x == 1 else 'Status: Not Done'
+            print(f"TaskID :{elem[0]} | Task: {elem[1]} | {s(elem[2])} ")
 
     def mark(self):
-        connection = pymysql.connect(
-            host="localhost",
-            user="root",
-            password="root",
-            database="ToDo_DB"
-        )
-        with connection.cursor() as c:
-            get_id = int(input("Enter the task ID: "))
-            get_mark = int(input("Type 1 if the task is Done else 0: "))
-            c.execute("UPDATE `todo_list` SET done=%s WHERE taskID=%s;", (get_mark, get_id))
-            connection.commit()
 
-        connection.close()
+        get_id: int = int(input("Enter the task ID: "))
+        get_mark: int = int(input("Type 1 if the task is Done else 0: "))
 
-    # ask user for id to mark and mark it
+        execute_query(f"UPDATE `todo_list` SET done={get_mark} WHERE taskID={get_id};","ToDo_DB")
+
+
     def add(self):
-        connection = pymysql.connect(
-            host="localhost",
-            user="root",
-            password="root",
-            database="ToDo_DB"
-        )
-        with connection.cursor() as c:
-            user_get = str(input("State the task you wish to enter:"))
-            c.execute("INSERT INTO `todo_list` (task,done) values (%s,false);", user_get)
-            connection.commit()
-        connection.close()
+        user_get = input("State the task you wish to enter:")
+        execute_query(f"INSERT INTO `todo_list` (task,done) values ('{user_get}',false);","ToDo_DB")
 
-    # ask user for task details and save it to db
+
     def delete(self):
-        connection = pymysql.connect(
-            host="localhost",
-            user="root",
-            password="root",
-            database="ToDo_DB"
-        )
-        with connection.cursor() as c:
-            user_id=int(input("Select the ID of the task you wish to delete: "))
-            c.execute("DELETE FROM `todo_list` WHERE taskID=%s;",user_id)
-            connection.commit()
-        connection.close()
+        user_id = int(input("Select the ID of the task you wish to delete: "))
+        execute_query(f"DELETE FROM `todo_list` WHERE taskID='{user_id}';","ToDo_DB")
+
 
 
     def start(self):
