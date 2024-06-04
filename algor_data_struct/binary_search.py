@@ -21,6 +21,6 @@ def bin_search_ier(itr, key):
 
 if __name__ == '__main__':
     test_lst = [2, 3, 4, 10, 40]
-    x = 50
+    x = 10
     a = bin_search_ier(test_lst, x)
     print(a)

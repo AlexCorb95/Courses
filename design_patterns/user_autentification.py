@@ -9,7 +9,7 @@ class User:
         self.autentificat = autentificat
 
 
-eu = User(True)
+eu = User(False) #IF true count to 10
 
 
 def verify_auth(func):

@@ -8,3 +8,4 @@ def birthdayCakeCandles(candles):
     return candles.count(maxim)
 
 result = birthdayCakeCandles(candel)
+print(result)

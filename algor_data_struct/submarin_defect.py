@@ -33,7 +33,7 @@ def find_the_nubmer(fu_text):
     apperence = 0
     fu_list = fu_text.split('\n')
     print(fu_list)
-    fuu_list = [linie.split("|")[1] for linie in fu_list]
+    fuu_list = [linie.split("|") for linie in fu_list]
     print(fuu_list)
     new_item = [item.split() for item in fuu_list]
     print(new_item)

@@ -30,5 +30,4 @@ def draw_pyramid2(width):
             space = " "
         print(f'{"^" * ((width - index) // 2 - 1)}{space}{"*" * index}{space}{"^" * ((width - index) // 2 - 1)}')
 
-
-# draw_pyramid2(21)
+draw_pyramid2(21)
