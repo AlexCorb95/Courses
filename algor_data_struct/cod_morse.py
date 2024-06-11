@@ -66,8 +66,9 @@ def morese_encoder(sentance: str):
     sentance_lst = [item for item in sentance.upper()]
     for char in sentance_lst:
         sentance_encode += "".join(list(MORSE_CODE.keys())[list(MORSE_CODE.values()).index((char))])+" "
-    #print(sentance_encode)
+    print(sentance_encode)
     return sentance_encode
+
 t1 = time.time()
 a = morese_encoder(long_sent)
 t2 = time.time()
